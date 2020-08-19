@@ -11,6 +11,11 @@ Gem::Specification.new do |s|
   s.summary     = 'The push notification service for Ruby.'
   s.description = 'The push notification service for Ruby.'
   s.license     = 'MIT'
+  s.metadata    = {
+    "bug_tracker_uri" => "https://github.com/rpush/rpush/issues",
+    "changelog_uri" => "https://github.com/rpush/rpush/blob/master/CHANGELOG.md",
+    "source_code_uri" => "https://github.com/rpush/rpush"
+  }
 
   s.files         = `git ls-files -- lib README.md CHANGELOG.md LICENSE`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}`.split("\n")
@@ -30,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'net-http-persistent'
   s.add_runtime_dependency 'net-http2', '~> 0.14'
   s.add_runtime_dependency 'jwt', '>= 1.5.6'
-  s.add_runtime_dependency 'activesupport'
+  s.add_runtime_dependency 'activesupport', '>= 5.0'
   s.add_runtime_dependency 'thor', ['>= 0.18.1', '< 2.0']
   s.add_runtime_dependency 'railties'
   s.add_runtime_dependency 'rainbow'
