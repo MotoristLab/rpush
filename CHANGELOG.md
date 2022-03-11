@@ -1,5 +1,64 @@
 # Changelog
 
+## [v7.0.1](https://github.com/rpush/rpush/tree/v7.0.1) (2022-03-02)
+
+[Full Changelog](https://github.com/rpush/rpush/compare/v7.0.0...v7.0.1)
+
+**Merged pull requests:**
+
+- Fix deprecation warnings from the redis gem [\#636](https://github.com/rpush/rpush/pull/636) ([sharang-d](https://github.com/sharang-d))
+
+## [Unreleased](https://github.com/rpush/rpush/tree/HEAD)
+
+[Full Changelog](https://github.com/rpush/rpush/compare/v7.0.0...HEAD)
+
+## [v7.0.0](https://github.com/rpush/rpush/tree/HEAD)
+
+[Full Changelog](https://github.com/rpush/rpush/compare/v6.0.1...v7.0.0)
+
+**Merged pull requests:**
+
+- Test with Ruby 3.1 [\#632](https://github.com/rpush/rpush/pull/632) ([aried3r](https://github.com/aried3r))
+- Resolves Rails 7 Time.now.to\_s deprecation warning [\#630](https://github.com/rpush/rpush/pull/630) ([gregblake](https://github.com/gregblake))
+- Adds Rails 7 Support [\#629](https://github.com/rpush/rpush/pull/629) ([gregblake](https://github.com/gregblake))
+- Test with Rails 7.0.0.alpha2 [\#626](https://github.com/rpush/rpush/pull/626) ([aried3r](https://github.com/aried3r))
+
+**Breaking:**
+
+- Drop support for Ruby 2.3 [\#631](https://github.com/rpush/rpush/pull/631) ([aried3r](https://github.com/aried3r))
+
+## [v6.0.1](https://github.com/rpush/rpush/tree/v6.0.1) (2021-10-08)
+
+[Full Changelog](https://github.com/rpush/rpush/compare/v6.0.0...v6.0.1)
+
+**Merged pull requests:**
+
+- Don't limit webpush registration keys [\#624](https://github.com/rpush/rpush/pull/624) ([treyrich](https://github.com/treyrich))
+- Add Prometheus Exporter plugin link to README [\#617](https://github.com/rpush/rpush/pull/617) ([maxsz](https://github.com/maxsz))
+- Reference current interface in config template [\#569](https://github.com/rpush/rpush/pull/569) ([benlangfeld](https://github.com/benlangfeld))
+- Default the Rails environment to RAILS\_ENV if set [\#562](https://github.com/rpush/rpush/pull/562) ([benlangfeld](https://github.com/benlangfeld))
+
+## [v6.0.0](https://github.com/rpush/rpush/tree/v6.0.0) (2021-05-21)
+
+[Full Changelog](https://github.com/rpush/rpush/compare/v5.4.0...v6.0.0)
+
+This release contains **breaking changes**, such as removing support for Rails versions older than 5.2.
+Please see the details in the PRs below.
+
+**Merged pull requests:**
+
+- Switch to GitHub Actions for CI [\#615](https://github.com/rpush/rpush/pull/615) ([aried3r](https://github.com/aried3r))
+- Prepare 6.0.0 release [\#613](https://github.com/rpush/rpush/pull/613) ([aried3r](https://github.com/aried3r))
+- Bump activesupport version to 5.2 or later [\#610](https://github.com/rpush/rpush/pull/610) ([biow0lf](https://github.com/biow0lf))
+- Fixed infinite loop issue with Apnsp8 delivery [\#608](https://github.com/rpush/rpush/pull/608) ([diminish7](https://github.com/diminish7))
+- Eliminate deprecation warning in Ruby 3.0 [\#602](https://github.com/rpush/rpush/pull/602) ([rofreg](https://github.com/rofreg))
+- Make ActiveRecord validations work with Apns2 client [\#601](https://github.com/rpush/rpush/pull/601) ([favrik](https://github.com/favrik))
+- Bump gemspec post\_install\_message [\#600](https://github.com/rpush/rpush/pull/600) ([fdoxyz](https://github.com/fdoxyz))
+- Remove references and checks for unsupported versions of Rails [\#599](https://github.com/rpush/rpush/pull/599) ([ericsaupe](https://github.com/ericsaupe))
+- Drop support for Rails 5.0 and 5.1 [\#597](https://github.com/rpush/rpush/pull/597) ([ericsaupe](https://github.com/ericsaupe))
+- Fix silent APNS notifications for Apns2 and Apnsp8 [\#596](https://github.com/rpush/rpush/pull/596) ([shved270189](https://github.com/shved270189))
+- Updates README to Apple's new EOL date for the APNs legacy binary protocol [\#595](https://github.com/rpush/rpush/pull/595) ([gregblake](https://github.com/gregblake))
+
 ## [v5.4.0](https://github.com/rpush/rpush/tree/v5.4.0) (2021-02-15)
 
 [Full Changelog](https://github.com/rpush/rpush/compare/v5.3.0...v5.4.0)
