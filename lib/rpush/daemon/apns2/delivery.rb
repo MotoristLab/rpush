@@ -26,7 +26,7 @@ module Rpush
           mark_batch_retryable(Time.now + 10.seconds, error)
           @client.close
           raise
-        rescue Errno::ECONNREFUSED, SocketError => error
+        rescue Errno::ECONNREFUSED, SocketError, HTTP2::Error::StreamLimitExceeded => error
           mark_batch_retryable(Time.now + 10.seconds, error)
           raise
         rescue StandardError => error
@@ -59,6 +59,11 @@ module Rpush
           end
 
           http_request.on(:close) { handle_response(notification, response) }
+
+          http_request.on(:error) do |exception|
+            Rpush.logger.error(exception)
+            reflect(:error, exception)
+          end
 
           @client.call_async(http_request)
         end

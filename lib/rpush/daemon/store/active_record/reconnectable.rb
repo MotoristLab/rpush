@@ -41,6 +41,8 @@ module Rpush
             sleep_to_avoid_thrashing
             database_connection_lost
             retry
+          rescue => e
+            Rpush.logger.error(e)
           end
 
           def database_connection_lost

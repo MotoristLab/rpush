@@ -64,6 +64,11 @@ module Rpush
 
           http_request.on(:close) { handle_response(notification, response) }
 
+          http_request.on(:error) do |exception|
+            Rpush.logger.error(exception)
+            reflect(:error, exception)
+          end
+
           if @first_push
             @first_push = false
             @client.call_async(http_request)
