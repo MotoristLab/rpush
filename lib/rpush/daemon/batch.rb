@@ -95,6 +95,13 @@ module Rpush
       def all_processed
         @mutex.synchronize do
           @num_processed = @notifications.size
+          all_processed = [].concat(@delivered).concat(@failed.values.flatten).concat(@retryable.values.flatten).compact.uniq
+          processed = all_processed.size
+          if @num_processed != processed
+            ids = @notifications.pluck(:id) - all_processed.pluck(:id)
+            other_ids = all_processed.pluck(:id) - @notifications.pluck(:id)
+            Rpush.logger.error("All Proccessed: Missing #{@num_processed - processed}(#{processed}, #{@num_processed}, #{ids}, #{other_ids}) backtrace #{caller_locations}")
+          end
           complete
         end
       end
