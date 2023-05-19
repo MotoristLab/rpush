@@ -72,7 +72,10 @@ module Rpush
           return if ids.empty?
 
           with_database_reconnect_and_retry do
-            Rpush::Client::ActiveRecord::Notification.where(id: ids).update_all(['processing = ?, delivered = ?, delivered_at = ?, failed = ?, failed_at = ?, retries = retries + 1, deliver_after = ?', false, false, nil, false, nil, deliver_after])
+            relation = Rpush::Client::ActiveRecord::Notification.where(id: ids)
+            relation_ids = relation.select(:id).pluck(:id)
+            count = relation.update_all(['processing = ?, delivered = ?, delivered_at = ?, failed = ?, failed_at = ?, retries = retries + 1, deliver_after = ?', false, false, nil, false, nil, deliver_after])
+            Rpush.logger.error("Retryable: Could not update #{ids - relation_ids} deliver_after(#{deliver_after}) ids(#{ids}) relation_ids(#{relation_ids})") if ids.size != count || count != relation_ids.size
           end
         end
 
@@ -99,7 +102,10 @@ module Rpush
             ids << n.id
           end
           with_database_reconnect_and_retry do
-            Rpush::Client::ActiveRecord::Notification.where(id: ids).update_all(['processing = ?, delivered = ?, delivered_at = ?', false, true, now])
+            relation = Rpush::Client::ActiveRecord::Notification.where(id: ids)
+            relation_ids = relation.select(:id).pluck(:id)
+            count = relation.update_all(['processing = ?, delivered = ?, delivered_at = ?', false, true, now])
+            Rpush.logger.error("Delivered: Could not update #{ids - relation_ids} time(#{now}) ids(#{ids}) relation_ids(#{relation_ids})") if ids.size != count || count != relation_ids.size
           end
         end
 
@@ -134,7 +140,10 @@ module Rpush
           return if ids.empty?
 
           with_database_reconnect_and_retry do
-            Rpush::Client::ActiveRecord::Notification.where(id: ids).update_all(['processing = ?, delivered = ?, delivered_at = NULL, failed = ?, failed_at = ?, error_code = ?, error_description = ?', false, false, true, time, code, description])
+            relation = Rpush::Client::ActiveRecord::Notification.where(id: ids)
+            relation_ids = relation.select(:id).pluck(:id)
+            count = relation.update_all(['processing = ?, delivered = ?, delivered_at = NULL, failed = ?, failed_at = ?, error_code = ?, error_description = ?', false, false, true, time, code, description])
+            Rpush.logger.error("Failed: Could not update #{ids - relation_ids} time(#{time}) code(#{code}) description(#{description}) ids(#{ids}) relation_ids(#{relation_ids})") if ids.size != count || count != relation_ids.size
           end
         end
 
