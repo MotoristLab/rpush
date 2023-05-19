@@ -41,9 +41,11 @@ module Rpush
       end
 
       def stop
+        queue_size = @queue.size
         @queue.push([STOP, object_id]) if @thread
         @thread.join if @thread
         @dispatcher.cleanup
+        log_error("Rpush[Stop]: queue(#{queue_size}, #{@queue.size}) stopping") if queue_size > 0
       rescue StandardError => e
         log_error(e)
         reflect(:error, e)

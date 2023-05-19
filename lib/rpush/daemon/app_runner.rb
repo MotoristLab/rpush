@@ -119,7 +119,7 @@ module Rpush
       def enqueue(notifications)
         if service.batch_deliveries?
           batch_size = (notifications.size / num_dispatcher_loops.to_f).ceil
-          if batch_size <= 0 || notifications.size <= num_dispatcher_loops.to_f
+          if batch_size <= 0 || num_dispatcher_loops.to_f <= 0
             Rpush.logger.error("Rpush[Enqueue]: Invalid batch size(#{batch_size}) notification(#{notifications.size}) dispatcher(#{num_dispatcher_loops.to_f})")
           end
           notifications.in_groups_of(batch_size, false).each do |batch_notifications|
