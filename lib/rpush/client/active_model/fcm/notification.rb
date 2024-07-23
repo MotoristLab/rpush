@@ -50,7 +50,7 @@ module Rpush
 
           def as_json(options = nil) # rubocop:disable Metrics/PerceivedComplexity
             json = {
-              'data' => data,
+              'data' => transform_data(data),
               'android' => android_config,
               'apns' => apns_config,
               'token' => device_token
@@ -118,6 +118,17 @@ module Rpush
             when 10 then 'PRIORITY_MAX'
             else
               'PRIORITY_DEFAULT'
+            end
+          end
+
+          def transform_data(data)
+            return if data.blank?
+      
+            result = data.transform_keys(&:to_s)
+            result.transform_values do |value|
+              next nil if value.nil?
+      
+              value.is_a?(Hash) ? value.to_json : value.to_s
             end
           end
         end
