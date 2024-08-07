@@ -50,6 +50,7 @@ module Rpush
           def content_available=(bool)
             return unless bool
             self.data = (data || {}).merge(CONTENT_AVAILABLE_KEY => true)
+            write_attribute(:content_available, true)
           end
 
           def content_available?
